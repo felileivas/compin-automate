@@ -1,0 +1,1 @@
+compin-automate
