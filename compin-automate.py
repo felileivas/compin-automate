@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
-from datetime import datetime
 import smtplib
 import mimetypes
 from email.mime.multipart import MIMEMultipart
@@ -13,16 +12,7 @@ from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from PIL import Image
 
-#RUT sin puntos y con guion
-rut = ''
-#Folio con guion
-folio = ''
-#Correo electronico y clave del correo
-correo = ''
-passwordcorreo = ''
-#Lista de destinarios que recibiran el correo
-allListCorreos = [""]
-
+from auth import *
 
 driver = webdriver.Firefox()
 driver.set_window_size(680, 1150)
