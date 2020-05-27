@@ -11,6 +11,7 @@ from email.mime.base import MIMEBase
 from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from PIL import Image
+import os
 
 from auth import *
 
@@ -48,24 +49,11 @@ for arrayCorreos in  allListCorreos:
 
     maintype, subtype = ctype.split("/", 1)
 
-    if maintype == "text":
-        fp = open(fileToSend)
-        attachment = MIMEText(fp.read(), _subtype=subtype)
-        fp.close()
-    elif maintype == "image":
+    if maintype == "image":
         fp = open(fileToSend, "rb")
         attachment = MIMEImage(fp.read(), _subtype=subtype)
         fp.close()
-    elif maintype == "audio":
-        fp = open(fileToSend, "rb")
-        attachment = MIMEAudio(fp.read(), _subtype=subtype)
-        fp.close()
-    else:
-        fp = open(fileToSend, "rb")
-        attachment = MIMEBase(maintype, subtype)
-        attachment.set_payload(fp.read())
-        fp.close()
-        encoders.encode_base64(attachment)
+
     attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
 
     msg.attach(attachment) 
@@ -77,6 +65,7 @@ for arrayCorreos in  allListCorreos:
     server.sendmail(msg['From'], msg['To'], msg.as_string())
     server.quit()
 
-
+os.remove("Imagen.jpg")
+os.remove("Imagen.png")
 
 
